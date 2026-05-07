@@ -9,16 +9,25 @@
 /* Begin PBXBuildFile section */
 		09C35542F3BD3D7C30CD480F /* NFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30A41F164A0A62804F83BD /* NFT.swift */; };
 		0C3916FB0FD016A46F4E1B2B /* OceanGateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62630B5446F9689B203CF81D /* OceanGateApp.swift */; };
+		0F758305F6024D02AB806292 /* ExploreStateViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089FE8C57ED8416480F2ABB9 /* ExploreStateViews.swift */; };
+		14427A152FAC5B2700DD91B3 /* NFTDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14427A142FAC5B2000DD91B3 /* NFTDetailViewModel.swift */; };
 		15BFDD5CBF5D01EA88390A8E /* GlassPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E5EFB8906660D25E9EE50D /* GlassPanel.swift */; };
 		2744C5350AC1C22BA7ABDE2C /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D87CECB19A70C4B98FB9B /* AppConfiguration.swift */; };
 		3D643EA4AF7A631FAE30A695 /* OpenSeaAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4660A0E1AAD791054115045 /* OpenSeaAPIClient.swift */; };
+		446CC75334464CBF81328550 /* ExploreLayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE55ACCA3F44F3B91F66978 /* ExploreLayoutMetrics.swift */; };
+		4C9642B9D5D24817BE4DE4F8 /* NFTDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D2483175DA84D00ADBDCD08 /* NFTDetailView.swift */; };
 		4F8C9E774EB0AD4FAC2B80BC /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */; };
+		50E6A5E567D0429E9CA90BDD /* CollectionHeroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2EC6D258CD49C994556F91 /* CollectionHeroView.swift */; };
+		5CE43FF436724D9C94901DC5 /* NFTOrbitSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B98CD5015C546F48E159877 /* NFTOrbitSection.swift */; };
+		6AB67195C8CE4B47A3F2B69E /* CollectionSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646C372ADBA54867937E4373 /* CollectionSignalView.swift */; };
 		79ACD2E37475A46C45C3563E /* OpenSeaDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B678AD4A5DC1F10B0719B477 /* OpenSeaDTOs.swift */; };
 		7CADF23E5D51FA3B4F46E672 /* AnimatedNeonBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84890BB296EA075D1EE1A5E6 /* AnimatedNeonBackground.swift */; };
 		7F53650C49C52DB4A512382D /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C79453AE0A5122D8F11FB /* ExploreView.swift */; };
+		82FA023E90F64729BBEF4CDD /* ExploreHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9EDB6EFA4D4067B4F51BE7 /* ExploreHeaderView.swift */; };
 		8604904D9DF790A217A7FA9E /* AsyncNFTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5ED0DC2E4920C864CE91DF /* AsyncNFTImage.swift */; };
 		88FB92251501C97EF8C07294 /* NeonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855A4AA3D9AF459F24878F7B /* NeonTheme.swift */; };
 		8A67B7A80177FDB2B68CF966 /* OpenSeaServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8E15E9815446A3E5E2A6D /* OpenSeaServicing.swift */; };
+		9337B21564D347F58DA7A09A /* CollectionRailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756B4656800A4C68939C8A67 /* CollectionRailView.swift */; };
 		BCB6E6185ACC32A063E4EF78 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D4BF77D707A0F2B148AA0 /* Formatters.swift */; };
 		C065BE619BF01D3413F91DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298E68F6816B5C1368D1C912 /* Assets.xcassets */; };
 		C2E2A7176EF5E614FEEE9497 /* OpenSeaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31B090DD53C769B6083159 /* OpenSeaRepository.swift */; };
@@ -27,18 +36,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		089FE8C57ED8416480F2ABB9 /* ExploreStateViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreStateViews.swift; sourceTree = "<group>"; };
 		0A1D87CECB19A70C4B98FB9B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		0DA707A6C4DF2BA036EE028A /* CollectionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOverview.swift; sourceTree = "<group>"; };
+		14427A142FAC5B2000DD91B3 /* NFTDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailViewModel.swift; sourceTree = "<group>"; };
 		298E68F6816B5C1368D1C912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47ECF87298394DAC851DB70B /* OpenSea.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = OpenSea.local.xcconfig; sourceTree = "<group>"; };
 		526C79453AE0A5122D8F11FB /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
 		53A10101BEBC9AB301AF6739 /* PreviewOpenSeaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewOpenSeaService.swift; sourceTree = "<group>"; };
 		58E5EFB8906660D25E9EE50D /* GlassPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassPanel.swift; sourceTree = "<group>"; };
+		5C9EDB6EFA4D4067B4F51BE7 /* ExploreHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderView.swift; sourceTree = "<group>"; };
 		5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		5D2483175DA84D00ADBDCD08 /* NFTDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailView.swift; sourceTree = "<group>"; };
+		5E2EC6D258CD49C994556F91 /* CollectionHeroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeroView.swift; sourceTree = "<group>"; };
 		62630B5446F9689B203CF81D /* OceanGateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OceanGateApp.swift; sourceTree = "<group>"; };
+		646C372ADBA54867937E4373 /* CollectionSignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSignalView.swift; sourceTree = "<group>"; };
 		6F30A41F164A0A62804F83BD /* NFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFT.swift; sourceTree = "<group>"; };
+		756B4656800A4C68939C8A67 /* CollectionRailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRailView.swift; sourceTree = "<group>"; };
+		7B98CD5015C546F48E159877 /* NFTOrbitSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTOrbitSection.swift; sourceTree = "<group>"; };
 		84890BB296EA075D1EE1A5E6 /* AnimatedNeonBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNeonBackground.swift; sourceTree = "<group>"; };
 		855A4AA3D9AF459F24878F7B /* NeonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonTheme.swift; sourceTree = "<group>"; };
+		8DE55ACCA3F44F3B91F66978 /* ExploreLayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreLayoutMetrics.swift; sourceTree = "<group>"; };
 		9F5ED0DC2E4920C864CE91DF /* AsyncNFTImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNFTImage.swift; sourceTree = "<group>"; };
 		A5F8E15E9815446A3E5E2A6D /* OpenSeaServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaServicing.swift; sourceTree = "<group>"; };
 		AAE28471416567573B1746A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +74,47 @@
 				B678AD4A5DC1F10B0719B477 /* OpenSeaDTOs.swift */,
 			);
 			path = DTOs;
+			sourceTree = "<group>";
+		};
+		14427A102FAC5A4F00DD91B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				756B4656800A4C68939C8A67 /* CollectionRailView.swift */,
+				646C372ADBA54867937E4373 /* CollectionSignalView.swift */,
+				5C9EDB6EFA4D4067B4F51BE7 /* ExploreHeaderView.swift */,
+				089FE8C57ED8416480F2ABB9 /* ExploreStateViews.swift */,
+				526C79453AE0A5122D8F11FB /* ExploreView.swift */,
+				7B98CD5015C546F48E159877 /* NFTOrbitSection.swift */,
+				5E2EC6D258CD49C994556F91 /* CollectionHeroView.swift */,
+				8DE55ACCA3F44F3B91F66978 /* ExploreLayoutMetrics.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		14427A112FAC5A7800DD91B3 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		14427A122FAC5AC500DD91B3 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				14427A132FAC5ADB00DD91B3 /* NFTDetails */,
+				F880BD7672032AAA2DB68165 /* Explore */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		14427A132FAC5ADB00DD91B3 /* NFTDetails */ = {
+			isa = PBXGroup;
+			children = (
+				14427A142FAC5B2000DD91B3 /* NFTDetailViewModel.swift */,
+				5D2483175DA84D00ADBDCD08 /* NFTDetailView.swift */,
+			);
+			path = NFTDetails;
 			sourceTree = "<group>";
 		};
 		1EF3E6C60271A6490D0CD3E9 /* Shared */ = {
@@ -162,8 +221,8 @@
 		C0CFCEF13D1CD3C248318194 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				14427A122FAC5AC500DD91B3 /* Features */,
 				59BAB24F9FAAEA57196BFE14 /* DesignSystem */,
-				F880BD7672032AAA2DB68165 /* Explore */,
 				1EF3E6C60271A6490D0CD3E9 /* Shared */,
 			);
 			path = Presentation;
@@ -198,8 +257,8 @@
 		F880BD7672032AAA2DB68165 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				526C79453AE0A5122D8F11FB /* ExploreView.swift */,
-				5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */,
+				14427A102FAC5A4F00DD91B3 /* Views */,
+				14427A112FAC5A7800DD91B3 /* ViewModels */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -272,11 +331,20 @@
 				2744C5350AC1C22BA7ABDE2C /* AppConfiguration.swift in Sources */,
 				8604904D9DF790A217A7FA9E /* AsyncNFTImage.swift in Sources */,
 				E26FA679D77008C3823297B1 /* CollectionOverview.swift in Sources */,
+				50E6A5E567D0429E9CA90BDD /* CollectionHeroView.swift in Sources */,
+				9337B21564D347F58DA7A09A /* CollectionRailView.swift in Sources */,
+				6AB67195C8CE4B47A3F2B69E /* CollectionSignalView.swift in Sources */,
+				82FA023E90F64729BBEF4CDD /* ExploreHeaderView.swift in Sources */,
+				446CC75334464CBF81328550 /* ExploreLayoutMetrics.swift in Sources */,
+				0F758305F6024D02AB806292 /* ExploreStateViews.swift in Sources */,
 				7F53650C49C52DB4A512382D /* ExploreView.swift in Sources */,
 				4F8C9E774EB0AD4FAC2B80BC /* ExploreViewModel.swift in Sources */,
 				BCB6E6185ACC32A063E4EF78 /* Formatters.swift in Sources */,
 				15BFDD5CBF5D01EA88390A8E /* GlassPanel.swift in Sources */,
+				4C9642B9D5D24817BE4DE4F8 /* NFTDetailView.swift in Sources */,
+				14427A152FAC5B2700DD91B3 /* NFTDetailViewModel.swift in Sources */,
 				09C35542F3BD3D7C30CD480F /* NFT.swift in Sources */,
+				5CE43FF436724D9C94901DC5 /* NFTOrbitSection.swift in Sources */,
 				88FB92251501C97EF8C07294 /* NeonTheme.swift in Sources */,
 				0C3916FB0FD016A46F4E1B2B /* OceanGateApp.swift in Sources */,
 				3D643EA4AF7A631FAE30A695 /* OpenSeaAPIClient.swift in Sources */,
