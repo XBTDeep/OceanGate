@@ -3,7 +3,10 @@ import Foundation
 protocol OpenSeaAPIClienting {
     func fetchCollection(slug: String) async throws -> CollectionDTO
     func fetchCollectionStats(slug: String) async throws -> CollectionStatsResponseDTO
+    func fetchCollectionTraits(slug: String) async throws -> CollectionTraitsResponseDTO
     func fetchNFTs(collectionSlug: String, limit: Int) async throws -> NFTListResponseDTO
+    func fetchNFT(chain: String, contractAddress: String, identifier: String) async throws -> NFTDetailResponseDTO
+    func fetchBestListing(collectionSlug: String, identifier: String) async throws -> BestListingDTO
 }
 
 final class OpenSeaAPIClient: OpenSeaAPIClienting {
@@ -29,6 +32,10 @@ final class OpenSeaAPIClient: OpenSeaAPIClienting {
         try await request(path: "/api/v2/collections/\(slug)/stats")
     }
 
+    func fetchCollectionTraits(slug: String) async throws -> CollectionTraitsResponseDTO {
+        try await request(path: "/api/v2/traits/\(slug)")
+    }
+
     func fetchNFTs(collectionSlug: String, limit: Int) async throws -> NFTListResponseDTO {
         var components = URLComponents(url: baseURL.appending(path: "/api/v2/collection/\(collectionSlug)/nfts"), resolvingAgainstBaseURL: false)
         components?.queryItems = [
@@ -40,6 +47,14 @@ final class OpenSeaAPIClient: OpenSeaAPIClienting {
         }
 
         return try await request(url: url)
+    }
+
+    func fetchNFT(chain: String, contractAddress: String, identifier: String) async throws -> NFTDetailResponseDTO {
+        try await request(path: "/api/v2/chain/\(chain)/contract/\(contractAddress)/nfts/\(identifier)")
+    }
+
+    func fetchBestListing(collectionSlug: String, identifier: String) async throws -> BestListingDTO {
+        try await request(path: "/api/v2/listings/collection/\(collectionSlug)/nfts/\(identifier)/best")
     }
 
     private func request<Response: Decodable>(path: String) async throws -> Response {
@@ -108,4 +123,3 @@ enum OpenSeaAPIError: LocalizedError, Equatable {
         }
     }
 }
-

@@ -9,48 +9,48 @@ struct ExploreView: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            let horizontalPadding: CGFloat = 20
-            let contentWidth = max(0, geometry.size.width - horizontalPadding * 2)
+        NavigationStack {
+            GeometryReader { geometry in
+                let horizontalPadding: CGFloat = 20
+                let contentWidth = max(0, geometry.size.width - horizontalPadding * 2)
 
-            ZStack {
-                AnimatedNeonBackground()
+                ZStack {
+                    AnimatedNeonBackground()
 
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 24) {
-                        header(width: contentWidth)
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 24) {
+                            header(width: contentWidth)
 
-                        switch viewModel.phase {
-                        case .idle, .loading:
-                            LoadingPulseView(title: "Tuning the atlas")
-                                .frame(maxWidth: .infinity)
-                                .padding(.top, 80)
-                        case let .failed(message):
-                            ErrorStateView(message: message) {
-                                Task { await viewModel.refresh() }
+                            switch viewModel.phase {
+                            case .idle, .loading:
+                                LoadingPulseView(title: "Tuning the atlas")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.top, 80)
+                            case let .failed(message):
+                                ErrorStateView(message: message) {
+                                    Task { await viewModel.refresh() }
+                                }
+                            case .loaded:
+                                content(width: contentWidth, viewportWidth: geometry.size.width, horizontalPadding: horizontalPadding)
                             }
-                        case .loaded:
-                            content(width: contentWidth, viewportWidth: geometry.size.width, horizontalPadding: horizontalPadding)
                         }
+                        .frame(width: contentWidth, alignment: .leading)
+                        .padding(.horizontal, horizontalPadding)
+                        .padding(.top, 18)
+                        .padding(.bottom, 34)
+                        .frame(width: geometry.size.width, alignment: .leading)
                     }
-                    .frame(width: contentWidth, alignment: .leading)
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.top, 18)
-                    .padding(.bottom, 34)
-                    .frame(width: geometry.size.width, alignment: .leading)
-                }
-                .refreshable {
-                    await viewModel.refresh()
+                    .refreshable {
+                        await viewModel.refresh()
+                    }
                 }
             }
-        }
-        .task {
-            await viewModel.start()
-        }
-        .sheet(item: $viewModel.selectedNFT) { nft in
-            NFTDetailView(nft: nft)
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
+            .navigationDestination(for: NFT.self) { nft in
+                NFTDetailView(viewModel: viewModel.detailViewModel(for: nft))
+            }
+            .task {
+                await viewModel.start()
+            }
         }
     }
 
@@ -95,9 +95,9 @@ struct ExploreView: View {
             }
             .offset(x: -horizontalPadding)
 
-            NFTOrbitSection(phase: viewModel.nftPhase, nfts: viewModel.nfts, width: width) { nft in
-                viewModel.selectedNFT = nft
-            }
+            CollectionSignalView(phase: viewModel.traitPhase, traits: viewModel.collectionTraits, width: width)
+
+            NFTOrbitSection(phase: viewModel.nftPhase, nfts: viewModel.nfts, width: width)
         }
     }
 }
@@ -270,11 +270,105 @@ private struct CollectionRailView: View {
     }
 }
 
+private struct CollectionSignalView: View {
+    let phase: ExploreViewModel.Phase
+    let traits: [CollectionTrait]
+    let width: CGFloat
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                Text("Trait Radar")
+                    .font(.title3.weight(.black))
+                    .foregroundStyle(.white)
+
+                Spacer()
+
+                if case .loaded = phase, !traits.isEmpty {
+                    Text("\(traits.count) signals")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(NeonTheme.citrus)
+                }
+            }
+
+            switch phase {
+            case .idle, .loading:
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(0..<4, id: \.self) { _ in
+                            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                                .fill(NeonTheme.glass)
+                                .frame(width: 138, height: 74)
+                                .overlay {
+                                    ProgressView()
+                                        .tint(.white)
+                                }
+                        }
+                    }
+                }
+            case .failed:
+                EmptyView()
+            case .loaded:
+                if !traits.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(Array(traits.prefix(12).enumerated()), id: \.element.id) { index, trait in
+                                TraitRadarCard(
+                                    trait: trait,
+                                    accent: NeonTheme.spectrum[index % NeonTheme.spectrum.count]
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .frame(width: width, alignment: .leading)
+        .clipped()
+    }
+}
+
+private struct TraitRadarCard: View {
+    let trait: CollectionTrait
+    let accent: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(accent)
+                    .frame(width: 8, height: 8)
+
+                Text(trait.type.uppercased())
+                    .font(.caption2.weight(.black))
+                    .foregroundStyle(.white.opacity(0.5))
+                    .lineLimit(1)
+            }
+
+            Text(trait.topValue)
+                .font(.subheadline.weight(.black))
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+
+            Text(DisplayFormatters.compactNumber(Double(trait.count)))
+                .font(.caption.weight(.bold))
+                .foregroundStyle(accent)
+        }
+        .padding(12)
+        .frame(width: 148, height: 86, alignment: .leading)
+        .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(accent.opacity(0.36), lineWidth: 1)
+        }
+    }
+}
+
 private struct NFTOrbitSection: View {
     let phase: ExploreViewModel.Phase
     let nfts: [NFT]
     let width: CGFloat
-    var onSelect: (NFT) -> Void = { _ in }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -297,9 +391,10 @@ private struct NFTOrbitSection: View {
             case .loaded:
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 150), spacing: 14)], spacing: 14) {
                     ForEach(Array(nfts.prefix(30).enumerated()), id: \.element.id) { index, nft in
-                        NFTCard(nft: nft, accent: NeonTheme.spectrum[index % NeonTheme.spectrum.count]) {
-                            onSelect(nft)
+                        NavigationLink(value: nft) {
+                            NFTCard(nft: nft, accent: NeonTheme.spectrum[index % NeonTheme.spectrum.count])
                         }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -312,59 +407,57 @@ private struct NFTOrbitSection: View {
 private struct NFTCard: View {
     let nft: NFT
     let accent: Color
-    let onSelect: () -> Void
-    @State private var isPressed = false
 
     var body: some View {
-        Button(action: onSelect) {
-            VStack(alignment: .leading, spacing: 10) {
-                AsyncNFTImage(url: nft.imageURL, cornerRadius: 20)
-                    .aspectRatio(1, contentMode: .fit)
-                    .overlay(alignment: .topTrailing) {
-                        Image(systemName: "sparkle")
-                            .font(.caption.weight(.black))
-                            .padding(8)
-                            .background(.black.opacity(0.36), in: Circle())
-                            .padding(8)
-                    }
+        VStack(alignment: .leading, spacing: 10) {
+            AsyncNFTImage(url: nft.imageURL, cornerRadius: 20)
+                .aspectRatio(1, contentMode: .fit)
+                .overlay(alignment: .topTrailing) {
+                    Image(systemName: "chevron.right.circle.fill")
+                        .font(.headline.weight(.black))
+                        .padding(8)
+                        .background(.black.opacity(0.36), in: Circle())
+                        .padding(8)
+                }
 
-                Text(nft.name)
-                    .font(.subheadline.weight(.black))
-                    .foregroundStyle(.white)
-                    .lineLimit(2)
-                    .frame(minHeight: 38, alignment: .topLeading)
+            Text(nft.name)
+                .font(.subheadline.weight(.black))
+                .foregroundStyle(.white)
+                .lineLimit(2)
+                .frame(minHeight: 38, alignment: .topLeading)
 
-                Text("#\(nft.tokenIdentifier)")
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(accent)
-                    .lineLimit(1)
-            }
-            .padding(10)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .stroke(accent.opacity(0.55), lineWidth: 1)
-            }
-            .scaleEffect(isPressed ? 0.96 : 1)
-            .animation(.spring(response: 0.32, dampingFraction: 0.72), value: isPressed)
-            .onLongPressGesture(minimumDuration: 0.01, pressing: { pressing in
-                isPressed = pressing
-            }, perform: {})
+            Text("#\(nft.tokenIdentifier)")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(accent)
+                .lineLimit(1)
         }
-        .buttonStyle(.plain)
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(accent.opacity(0.55), lineWidth: 1)
+        }
+        .contentShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
     }
 }
 
 private struct NFTDetailView: View {
-    let nft: NFT
+    @State private var viewModel: NFTDetailViewModel
+
+    init(viewModel: NFTDetailViewModel) {
+        _viewModel = State(initialValue: viewModel)
+    }
 
     var body: some View {
+        let nft = viewModel.displayNFT
+        let detail = viewModel.detail
+
         ZStack {
             AnimatedNeonBackground()
 
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 18) {
+                VStack(alignment: .leading, spacing: 20) {
                     AsyncNFTImage(url: nft.imageURL, cornerRadius: 30)
                         .aspectRatio(1, contentMode: .fit)
                         .overlay(alignment: .topLeading) {
@@ -374,6 +467,15 @@ private struct NFTDetailView: View {
                                 .padding(.vertical, 8)
                                 .background(.black.opacity(0.48), in: Capsule())
                                 .padding(14)
+                        }
+                        .overlay(alignment: .bottomTrailing) {
+                            if case .loading = viewModel.phase {
+                                ProgressView()
+                                    .tint(.white)
+                                    .padding(12)
+                                    .background(.black.opacity(0.5), in: Circle())
+                                    .padding(14)
+                            }
                         }
 
                     VStack(alignment: .leading, spacing: 10) {
@@ -389,22 +491,211 @@ private struct NFTDetailView: View {
                             Text(description)
                                 .font(.callout)
                                 .foregroundStyle(.white.opacity(0.72))
-                        }
-
-                        if let openseaURL = nft.openseaURL {
-                            Link(destination: openseaURL) {
-                                Label("View Listing", systemImage: "safari.fill")
-                                    .font(.headline.weight(.bold))
-                                    .frame(maxWidth: .infinity)
-                            }
-                            .buttonStyle(.borderedProminent)
-                            .tint(NeonTheme.cobalt)
-                            .padding(.top, 4)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .padding(.horizontal, 4)
+
+                    DetailMarketPanel(nft: nft, detail: detail, phase: viewModel.phase) {
+                        Task { await viewModel.refresh() }
+                    }
+
+                    if let detail {
+                        DetailInfoGrid(detail: detail)
+
+                        if !detail.traits.isEmpty {
+                            DetailTraitGrid(traits: detail.traits)
+                        }
+
+                        if !detail.owners.isEmpty {
+                            DetailOwnersView(owners: detail.owners)
+                        }
+                    }
                 }
                 .padding(20)
+            }
+        }
+        .navigationTitle(nft.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.start()
+        }
+    }
+}
+
+private struct DetailMarketPanel: View {
+    let nft: NFT
+    let detail: NFTDetail?
+    let phase: ExploreViewModel.Phase
+    let retry: () -> Void
+
+    var body: some View {
+        GlassPanel {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("Best Listing")
+                            .font(.caption.weight(.black))
+                            .foregroundStyle(.white.opacity(0.48))
+
+                        Text(DisplayFormatters.price(detail?.bestListing?.price))
+                            .font(.system(size: 27, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.65)
+                    }
+
+                    Spacer(minLength: 12)
+
+                    if let rank = detail?.rarity?.rank {
+                        VStack(alignment: .trailing, spacing: 5) {
+                            Text("Rarity")
+                                .font(.caption.weight(.black))
+                                .foregroundStyle(.white.opacity(0.48))
+
+                            Text("#\(rank)")
+                                .font(.title3.weight(.black))
+                                .foregroundStyle(NeonTheme.citrus)
+                        }
+                    }
+                }
+
+                switch phase {
+                case let .failed(message):
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(message)
+                            .font(.caption)
+                            .foregroundStyle(.white.opacity(0.68))
+                            .fixedSize(horizontal: false, vertical: true)
+
+                        Button(action: retry) {
+                            Label("Retry", systemImage: "arrow.clockwise")
+                                .font(.headline.weight(.bold))
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(NeonTheme.coral)
+                    }
+                default:
+                    if let openseaURL = nft.openseaURL {
+                        Link(destination: openseaURL) {
+                            Label("Open on OpenSea", systemImage: "safari.fill")
+                                .font(.headline.weight(.bold))
+                                .frame(maxWidth: .infinity)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(NeonTheme.cobalt)
+                    }
+                }
+            }
+            .padding(18)
+        }
+    }
+}
+
+private struct DetailInfoGrid: View {
+    let detail: NFTDetail
+
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+            DetailInfoTile(title: "Standard", value: detail.tokenStandard?.uppercased() ?? "N/A", color: NeonTheme.mint)
+            DetailInfoTile(title: "Traits", value: "\(detail.traits.count)", color: NeonTheme.cobalt)
+            DetailInfoTile(title: "Owners", value: "\(detail.owners.count)", color: NeonTheme.coral)
+            DetailInfoTile(title: "Score", value: DisplayFormatters.rarity(detail.rarity?.score), color: NeonTheme.citrus)
+        }
+    }
+}
+
+private struct DetailInfoTile: View {
+    let title: String
+    let value: String
+    let color: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text(title.uppercased())
+                .font(.caption2.weight(.black))
+                .foregroundStyle(.white.opacity(0.48))
+
+            Text(value)
+                .font(.headline.weight(.black))
+                .foregroundStyle(color)
+                .lineLimit(1)
+                .minimumScaleFactor(0.66)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, minHeight: 76, alignment: .leading)
+        .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+}
+
+private struct DetailTraitGrid: View {
+    let traits: [NFTTrait]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Traits")
+                .font(.title3.weight(.black))
+                .foregroundStyle(.white)
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 144), spacing: 10)], spacing: 10) {
+                ForEach(Array(traits.enumerated()), id: \.element.id) { index, trait in
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(trait.type.uppercased())
+                            .font(.caption2.weight(.black))
+                            .foregroundStyle(.white.opacity(0.48))
+                            .lineLimit(1)
+
+                        Text(trait.value)
+                            .font(.subheadline.weight(.black))
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.7)
+
+                        if let count = trait.count {
+                            Text(DisplayFormatters.compactNumber(Double(count)))
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(NeonTheme.spectrum[index % NeonTheme.spectrum.count])
+                        }
+                    }
+                    .padding(12)
+                    .frame(maxWidth: .infinity, minHeight: 82, alignment: .leading)
+                    .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                }
+            }
+        }
+    }
+}
+
+private struct DetailOwnersView: View {
+    let owners: [NFTOwner]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Owners")
+                .font(.title3.weight(.black))
+                .foregroundStyle(.white)
+
+            ForEach(owners.prefix(4)) { owner in
+                HStack {
+                    Image(systemName: "person.crop.circle.hexagon.fill")
+                        .font(.title3.weight(.bold))
+                        .foregroundStyle(NeonTheme.mint)
+
+                    Text(DisplayFormatters.compactAddress(owner.address))
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(.white)
+
+                    Spacer()
+
+                    if let quantity = owner.quantity {
+                        Text("x\(quantity)")
+                            .font(.caption.weight(.black))
+                            .foregroundStyle(NeonTheme.citrus)
+                    }
+                }
+                .padding(14)
+                .background(NeonTheme.glass, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             }
         }
     }

@@ -21,3 +21,10 @@ struct CollectionStats: Equatable {
     static let empty = CollectionStats(floorPrice: nil, volume: nil, sales: nil, owners: nil)
 }
 
+struct CollectionTrait: Identifiable, Equatable, Hashable {
+    let type: String
+    let topValue: String
+    let count: Int
+
+    var id: String { "\(type)-\(topValue)" }
+}

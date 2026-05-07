@@ -23,10 +23,11 @@ final class ExploreViewModel {
 
     var phase: Phase = .idle
     var nftPhase: Phase = .idle
+    var traitPhase: Phase = .idle
     var collections: [CollectionOverview] = []
     var selectedSlug = "pudgypenguins"
     var nfts: [NFT] = []
-    var selectedNFT: NFT?
+    var collectionTraits: [CollectionTrait] = []
 
     var selectedCollection: CollectionOverview? {
         collections.first { $0.slug == selectedSlug } ?? collections.first
@@ -62,14 +63,30 @@ final class ExploreViewModel {
         guard selectedSlug != slug || nfts.isEmpty else { return }
         selectedSlug = slug
         nftPhase = .loading
+        traitPhase = .loading
+
+        async let loadedNFTs = service.nfts(in: slug, limit: 36)
+        async let loadedTraits = service.collectionTraits(slug: slug)
 
         do {
-            nfts = try await service.nfts(in: slug, limit: 36)
+            nfts = try await loadedNFTs
             nftPhase = .loaded
         } catch {
             nfts = []
             nftPhase = .failed(error.localizedDescription)
         }
+
+        do {
+            collectionTraits = try await loadedTraits
+            traitPhase = .loaded
+        } catch {
+            collectionTraits = []
+            traitPhase = .failed(error.localizedDescription)
+        }
+    }
+
+    func detailViewModel(for nft: NFT) -> NFTDetailViewModel {
+        NFTDetailViewModel(nft: nft, service: service)
     }
 
     private func loadCollections() async throws -> [CollectionOverview] {
@@ -109,5 +126,40 @@ final class ExploreViewModel {
         }
 
         return loadedCollections
+    }
+}
+
+@MainActor
+@Observable
+final class NFTDetailViewModel {
+    private let service: OpenSeaServicing
+
+    let seedNFT: NFT
+    var phase: ExploreViewModel.Phase = .idle
+    var detail: NFTDetail?
+
+    var displayNFT: NFT {
+        detail?.nft ?? seedNFT
+    }
+
+    init(nft: NFT, service: OpenSeaServicing) {
+        seedNFT = nft
+        self.service = service
+    }
+
+    func start() async {
+        guard phase == .idle else { return }
+        await refresh()
+    }
+
+    func refresh() async {
+        phase = .loading
+
+        do {
+            detail = try await service.nftDetail(nft: seedNFT, chain: "ethereum")
+            phase = .loaded
+        } catch {
+            phase = .failed(error.localizedDescription)
+        }
     }
 }
