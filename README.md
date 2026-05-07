@@ -1,6 +1,6 @@
-# Neon Atlas
+# Ocean Gate
 
-Neon Atlas is a SwiftUI iOS app that turns live OpenSea collection data into a kinetic discovery surface. It fetches featured collection details, collection stats, and NFT previews from OpenSea API v2, then presents them as animated neon galleries with tappable token detail sheets.
+Ocean Gate is a SwiftUI iOS app that turns live OpenSea collection data into a kinetic discovery surface. It fetches featured collection details, collection stats, and NFT previews from OpenSea API v2, then presents them as animated neon galleries with tappable token detail sheets.
 
 ## App Demo:
 
