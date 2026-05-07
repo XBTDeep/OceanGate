@@ -26,8 +26,15 @@ final class OpenSeaRepository: OpenSeaServicing {
     }
 
     func nfts(in collectionSlug: String, limit: Int) async throws -> [NFT] {
-        let response = try await client.fetchNFTs(collectionSlug: collectionSlug, limit: limit)
-        return response.nfts.map { NFT(dto: $0, fallbackCollectionSlug: collectionSlug) }
+        try await nftsPage(in: collectionSlug, limit: limit, cursor: nil).nfts
+    }
+
+    func nftsPage(in collectionSlug: String, limit: Int, cursor: String?) async throws -> NFTPage {
+        let response = try await client.fetchNFTs(collectionSlug: collectionSlug, limit: limit, cursor: cursor)
+        return NFTPage(
+            nfts: response.nfts.map { NFT(dto: $0, fallbackCollectionSlug: collectionSlug) },
+            nextCursor: response.next?.nilIfEmpty
+        )
     }
 
     func nftDetail(nft: NFT, chain: String = "ethereum") async throws -> NFTDetail {

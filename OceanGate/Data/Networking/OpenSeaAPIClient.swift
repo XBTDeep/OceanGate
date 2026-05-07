@@ -4,7 +4,7 @@ protocol OpenSeaAPIClienting {
     func fetchCollection(slug: String) async throws -> CollectionDTO
     func fetchCollectionStats(slug: String) async throws -> CollectionStatsResponseDTO
     func fetchCollectionTraits(slug: String) async throws -> CollectionTraitsResponseDTO
-    func fetchNFTs(collectionSlug: String, limit: Int) async throws -> NFTListResponseDTO
+    func fetchNFTs(collectionSlug: String, limit: Int, cursor: String?) async throws -> NFTListResponseDTO
     func fetchNFT(chain: String, contractAddress: String, identifier: String) async throws -> NFTDetailResponseDTO
     func fetchBestListing(collectionSlug: String, identifier: String) async throws -> BestListingDTO
 }
@@ -36,11 +36,15 @@ final class OpenSeaAPIClient: OpenSeaAPIClienting {
         try await request(path: "/api/v2/traits/\(slug)")
     }
 
-    func fetchNFTs(collectionSlug: String, limit: Int) async throws -> NFTListResponseDTO {
+    func fetchNFTs(collectionSlug: String, limit: Int, cursor: String?) async throws -> NFTListResponseDTO {
         var components = URLComponents(url: baseURL.appending(path: "/api/v2/collection/\(collectionSlug)/nfts"), resolvingAgainstBaseURL: false)
-        components?.queryItems = [
+        var queryItems = [
             URLQueryItem(name: "limit", value: "\(min(max(limit, 1), 200))")
         ]
+        if let cursor, !cursor.isEmpty {
+            queryItems.append(URLQueryItem(name: "next", value: cursor))
+        }
+        components?.queryItems = queryItems
 
         guard let url = components?.url else {
             throw OpenSeaAPIError.invalidURL

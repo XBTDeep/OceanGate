@@ -23,7 +23,15 @@ struct PreviewOpenSeaService: OpenSeaServicing {
     }
 
     func nfts(in collectionSlug: String, limit: Int) async throws -> [NFT] {
-        (0..<limit).map { index in
+        try await nftsPage(in: collectionSlug, limit: limit, cursor: nil).nfts
+    }
+
+    func nftsPage(in collectionSlug: String, limit: Int, cursor: String?) async throws -> NFTPage {
+        let startIndex = Int(cursor ?? "0") ?? 0
+        let maxPreviewCount = 120
+        let nextStartIndex = startIndex + limit
+
+        let nfts = (startIndex..<min(nextStartIndex, maxPreviewCount)).map { index in
             NFT(
                 tokenIdentifier: "\(1000 + index)",
                 collectionSlug: collectionSlug,
@@ -34,6 +42,11 @@ struct PreviewOpenSeaService: OpenSeaServicing {
                 openseaURL: nil
             )
         }
+
+        return NFTPage(
+            nfts: nfts,
+            nextCursor: nextStartIndex < maxPreviewCount ? "\(nextStartIndex)" : nil
+        )
     }
 
     func nftDetail(nft: NFT, chain: String) async throws -> NFTDetail {

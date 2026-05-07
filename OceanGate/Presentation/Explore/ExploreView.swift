@@ -97,7 +97,20 @@ struct ExploreView: View {
 
             CollectionSignalView(phase: viewModel.traitPhase, traits: viewModel.collectionTraits, width: width)
 
-            NFTOrbitSection(phase: viewModel.nftPhase, nfts: viewModel.nfts, width: width)
+            NFTOrbitSection(
+                phase: viewModel.nftPhase,
+                nfts: viewModel.nfts,
+                width: width,
+                isLoadingMore: viewModel.isLoadingMoreNFTs,
+                hasMoreNFTs: viewModel.hasMoreNFTs,
+                paginationErrorMessage: viewModel.paginationErrorMessage,
+                onLoadMore: {
+                    Task { await viewModel.loadMoreNFTs() }
+                },
+                onApproachEnd: { nft in
+                    Task { await viewModel.loadMoreNFTsIfNeeded(currentNFT: nft) }
+                }
+            )
         }
     }
 }
@@ -369,6 +382,11 @@ private struct NFTOrbitSection: View {
     let phase: ExploreViewModel.Phase
     let nfts: [NFT]
     let width: CGFloat
+    let isLoadingMore: Bool
+    let hasMoreNFTs: Bool
+    let paginationErrorMessage: String?
+    let onLoadMore: () -> Void
+    let onApproachEnd: (NFT) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -395,12 +413,69 @@ private struct NFTOrbitSection: View {
                             NFTCard(nft: nft, accent: NeonTheme.spectrum[index % NeonTheme.spectrum.count])
                         }
                         .buttonStyle(.plain)
+                        .onAppear {
+                            onApproachEnd(nft)
+                        }
                     }
                 }
+
+                NFTPaginationFooter(
+                    isLoadingMore: isLoadingMore,
+                    hasMoreNFTs: hasMoreNFTs,
+                    errorMessage: paginationErrorMessage,
+                    onLoadMore: onLoadMore
+                )
             }
         }
         .frame(width: width, alignment: .leading)
         .clipped()
+    }
+}
+
+private struct NFTPaginationFooter: View {
+    let isLoadingMore: Bool
+    let hasMoreNFTs: Bool
+    let errorMessage: String?
+    let onLoadMore: () -> Void
+
+    var body: some View {
+        Group {
+            if isLoadingMore {
+                HStack(spacing: 10) {
+                    ProgressView()
+                        .tint(.white)
+
+                    Text("Loading more NFTs")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.white.opacity(0.68))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 18)
+            } else if let errorMessage {
+                VStack(spacing: 10) {
+                    Text(errorMessage)
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.68))
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+
+                    Button(action: onLoadMore) {
+                        Label("Retry", systemImage: "arrow.clockwise")
+                            .font(.caption.weight(.black))
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(NeonTheme.coral)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 18)
+            } else if !hasMoreNFTs {
+                Text("End of collection page stream")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.white.opacity(0.48))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 18)
+            }
+        }
     }
 }
 

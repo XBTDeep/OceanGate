@@ -12,6 +12,7 @@ final class ExploreViewModel {
     }
 
     private let service: OpenSeaServicing
+    private let nftPageSize = 72
     private let featuredSlugs = [
         "pudgypenguins",
         "azuki",
@@ -28,6 +29,10 @@ final class ExploreViewModel {
     var selectedSlug = "pudgypenguins"
     var nfts: [NFT] = []
     var collectionTraits: [CollectionTrait] = []
+    var isLoadingMoreNFTs = false
+    var hasMoreNFTs = false
+    var paginationErrorMessage: String?
+    private var nftNextCursor: String?
 
     var selectedCollection: CollectionOverview? {
         collections.first { $0.slug == selectedSlug } ?? collections.first
@@ -53,35 +58,80 @@ final class ExploreViewModel {
                 selectedSlug = firstSlug
             }
 
-            await selectCollection(slug: selectedSlug)
+            await selectCollection(slug: selectedSlug, force: true)
         } catch {
             phase = .failed(error.localizedDescription)
         }
     }
 
-    func selectCollection(slug: String) async {
-        guard selectedSlug != slug || nfts.isEmpty else { return }
+    func selectCollection(slug: String, force: Bool = false) async {
+        guard force || selectedSlug != slug || nfts.isEmpty else { return }
         selectedSlug = slug
         nftPhase = .loading
         traitPhase = .loading
+        nfts = []
+        collectionTraits = []
+        nftNextCursor = nil
+        hasMoreNFTs = false
+        isLoadingMoreNFTs = false
+        paginationErrorMessage = nil
 
-        async let loadedNFTs = service.nfts(in: slug, limit: 36)
+        async let loadedNFTPage = service.nftsPage(in: slug, limit: nftPageSize, cursor: nil)
         async let loadedTraits = service.collectionTraits(slug: slug)
 
         do {
-            nfts = try await loadedNFTs
+            let page = try await loadedNFTPage
+            guard selectedSlug == slug else { return }
+            nfts = page.nfts
+            nftNextCursor = page.nextCursor
+            hasMoreNFTs = page.nextCursor != nil
             nftPhase = .loaded
         } catch {
+            guard selectedSlug == slug else { return }
             nfts = []
+            nftNextCursor = nil
+            hasMoreNFTs = false
             nftPhase = .failed(error.localizedDescription)
         }
 
         do {
-            collectionTraits = try await loadedTraits
+            let traits = try await loadedTraits
+            guard selectedSlug == slug else { return }
+            collectionTraits = traits
             traitPhase = .loaded
         } catch {
+            guard selectedSlug == slug else { return }
             collectionTraits = []
             traitPhase = .failed(error.localizedDescription)
+        }
+    }
+
+    func loadMoreNFTsIfNeeded(currentNFT: NFT?) async {
+        guard let currentNFT else { return }
+        guard nfts.suffix(8).contains(currentNFT) else { return }
+        await loadMoreNFTs()
+    }
+
+    func loadMoreNFTs() async {
+        guard !isLoadingMoreNFTs, let cursor = nftNextCursor else { return }
+
+        let slug = selectedSlug
+        isLoadingMoreNFTs = true
+        paginationErrorMessage = nil
+        defer { isLoadingMoreNFTs = false }
+
+        do {
+            let page = try await service.nftsPage(in: slug, limit: nftPageSize, cursor: cursor)
+            guard selectedSlug == slug else { return }
+
+            let existingIDs = Set(nfts.map(\.id))
+            let freshNFTs = page.nfts.filter { !existingIDs.contains($0.id) }
+            nfts.append(contentsOf: freshNFTs)
+            nftNextCursor = page.nextCursor
+            hasMoreNFTs = page.nextCursor != nil
+        } catch {
+            guard selectedSlug == slug else { return }
+            paginationErrorMessage = error.localizedDescription
         }
     }
 

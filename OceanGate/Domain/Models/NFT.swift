@@ -12,6 +12,11 @@ struct NFT: Identifiable, Equatable, Hashable {
     var id: String { "\(contractAddress)-\(tokenIdentifier)" }
 }
 
+struct NFTPage: Equatable {
+    let nfts: [NFT]
+    let nextCursor: String?
+}
+
 struct NFTDetail: Equatable {
     let nft: NFT
     let traits: [NFTTrait]
