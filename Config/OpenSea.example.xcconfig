@@ -1,0 +1,4 @@
+// Copy this file to OpenSea.local.xcconfig and set your own key locally.
+// OpenSea.local.xcconfig is intentionally gitignored.
+OPENSEA_API_KEY =
+

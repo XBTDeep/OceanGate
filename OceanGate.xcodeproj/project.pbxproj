@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		09C35542F3BD3D7C30CD480F /* NFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30A41F164A0A62804F83BD /* NFT.swift */; };
+		0C3916FB0FD016A46F4E1B2B /* OceanGateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62630B5446F9689B203CF81D /* OceanGateApp.swift */; };
+		15BFDD5CBF5D01EA88390A8E /* GlassPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E5EFB8906660D25E9EE50D /* GlassPanel.swift */; };
+		2744C5350AC1C22BA7ABDE2C /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1D87CECB19A70C4B98FB9B /* AppConfiguration.swift */; };
+		3D643EA4AF7A631FAE30A695 /* OpenSeaAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4660A0E1AAD791054115045 /* OpenSeaAPIClient.swift */; };
+		4F8C9E774EB0AD4FAC2B80BC /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */; };
+		79ACD2E37475A46C45C3563E /* OpenSeaDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = B678AD4A5DC1F10B0719B477 /* OpenSeaDTOs.swift */; };
+		7CADF23E5D51FA3B4F46E672 /* AnimatedNeonBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84890BB296EA075D1EE1A5E6 /* AnimatedNeonBackground.swift */; };
+		7F53650C49C52DB4A512382D /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526C79453AE0A5122D8F11FB /* ExploreView.swift */; };
+		8604904D9DF790A217A7FA9E /* AsyncNFTImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F5ED0DC2E4920C864CE91DF /* AsyncNFTImage.swift */; };
+		88FB92251501C97EF8C07294 /* NeonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855A4AA3D9AF459F24878F7B /* NeonTheme.swift */; };
+		8A67B7A80177FDB2B68CF966 /* OpenSeaServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F8E15E9815446A3E5E2A6D /* OpenSeaServicing.swift */; };
+		BCB6E6185ACC32A063E4EF78 /* Formatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75D4BF77D707A0F2B148AA0 /* Formatters.swift */; };
+		C065BE619BF01D3413F91DD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 298E68F6816B5C1368D1C912 /* Assets.xcassets */; };
+		C2E2A7176EF5E614FEEE9497 /* OpenSeaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD31B090DD53C769B6083159 /* OpenSeaRepository.swift */; };
+		D22C033DCC51A091372B1603 /* PreviewOpenSeaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A10101BEBC9AB301AF6739 /* PreviewOpenSeaService.swift */; };
+		E26FA679D77008C3823297B1 /* CollectionOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA707A6C4DF2BA036EE028A /* CollectionOverview.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A1D87CECB19A70C4B98FB9B /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		0DA707A6C4DF2BA036EE028A /* CollectionOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOverview.swift; sourceTree = "<group>"; };
+		298E68F6816B5C1368D1C912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47ECF87298394DAC851DB70B /* OpenSea.local.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = OpenSea.local.xcconfig; sourceTree = "<group>"; };
+		526C79453AE0A5122D8F11FB /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		53A10101BEBC9AB301AF6739 /* PreviewOpenSeaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewOpenSeaService.swift; sourceTree = "<group>"; };
+		58E5EFB8906660D25E9EE50D /* GlassPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassPanel.swift; sourceTree = "<group>"; };
+		5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		62630B5446F9689B203CF81D /* OceanGateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OceanGateApp.swift; sourceTree = "<group>"; };
+		6F30A41F164A0A62804F83BD /* NFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFT.swift; sourceTree = "<group>"; };
+		84890BB296EA075D1EE1A5E6 /* AnimatedNeonBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedNeonBackground.swift; sourceTree = "<group>"; };
+		855A4AA3D9AF459F24878F7B /* NeonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeonTheme.swift; sourceTree = "<group>"; };
+		9F5ED0DC2E4920C864CE91DF /* AsyncNFTImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncNFTImage.swift; sourceTree = "<group>"; };
+		A5F8E15E9815446A3E5E2A6D /* OpenSeaServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaServicing.swift; sourceTree = "<group>"; };
+		AAE28471416567573B1746A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B678AD4A5DC1F10B0719B477 /* OpenSeaDTOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaDTOs.swift; sourceTree = "<group>"; };
+		CD31B090DD53C769B6083159 /* OpenSeaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaRepository.swift; sourceTree = "<group>"; };
+		F4660A0E1AAD791054115045 /* OpenSeaAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaAPIClient.swift; sourceTree = "<group>"; };
+		F75D4BF77D707A0F2B148AA0 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
+		F7CEA97446F9472043FCB3CD /* OceanGate.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OceanGate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0B79FD1E226BF5C864BC26C3 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				B678AD4A5DC1F10B0719B477 /* OpenSeaDTOs.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		1EF3E6C60271A6490D0CD3E9 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				84890BB296EA075D1EE1A5E6 /* AnimatedNeonBackground.swift */,
+				9F5ED0DC2E4920C864CE91DF /* AsyncNFTImage.swift */,
+				58E5EFB8906660D25E9EE50D /* GlassPanel.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		28C6022B5159BD52F53D4EB5 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F4660A0E1AAD791054115045 /* OpenSeaAPIClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		32E7BDA2711CCF5116C6BF3F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C18AAB7CAD5AAB08F6907AC6 /* Models */,
+				B3F89F8B640DF0A5C8D1B7CE /* Protocols */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		52D4BF436E7B3734DB7B5833 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				CD31B090DD53C769B6083159 /* OpenSeaRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		59BAB24F9FAAEA57196BFE14 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				F75D4BF77D707A0F2B148AA0 /* Formatters.swift */,
+				855A4AA3D9AF459F24878F7B /* NeonTheme.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		5C048C9A516A2385FEB3EE8E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0B79FD1E226BF5C864BC26C3 /* DTOs */,
+				28C6022B5159BD52F53D4EB5 /* Networking */,
+				52D4BF436E7B3734DB7B5833 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B1D6064749F7ECBB28B7F29D /* OceanGate */ = {
+			isa = PBXGroup;
+			children = (
+				298E68F6816B5C1368D1C912 /* Assets.xcassets */,
+				AAE28471416567573B1746A4 /* Info.plist */,
+				BAEDC6C08DE6CDC5A177A4C9 /* App */,
+				5C048C9A516A2385FEB3EE8E /* Data */,
+				32E7BDA2711CCF5116C6BF3F /* Domain */,
+				C0CFCEF13D1CD3C248318194 /* Presentation */,
+				EB240E6BB00DA98F8CEA7AF1 /* Preview Content */,
+			);
+			path = OceanGate;
+			sourceTree = "<group>";
+		};
+		B3F89F8B640DF0A5C8D1B7CE /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A5F8E15E9815446A3E5E2A6D /* OpenSeaServicing.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B95F6F116FC2AD7F0B0E3B52 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7CEA97446F9472043FCB3CD /* OceanGate.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BAEDC6C08DE6CDC5A177A4C9 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0A1D87CECB19A70C4B98FB9B /* AppConfiguration.swift */,
+				62630B5446F9689B203CF81D /* OceanGateApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C0BA0359CF71AC41BDB499F8 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				47ECF87298394DAC851DB70B /* OpenSea.local.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C0CFCEF13D1CD3C248318194 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				59BAB24F9FAAEA57196BFE14 /* DesignSystem */,
+				F880BD7672032AAA2DB68165 /* Explore */,
+				1EF3E6C60271A6490D0CD3E9 /* Shared */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C18AAB7CAD5AAB08F6907AC6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0DA707A6C4DF2BA036EE028A /* CollectionOverview.swift */,
+				6F30A41F164A0A62804F83BD /* NFT.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EB240E6BB00DA98F8CEA7AF1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				53A10101BEBC9AB301AF6739 /* PreviewOpenSeaService.swift */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EFBC0D3E327713FA61B6136A = {
+			isa = PBXGroup;
+			children = (
+				C0BA0359CF71AC41BDB499F8 /* Config */,
+				B1D6064749F7ECBB28B7F29D /* OceanGate */,
+				B95F6F116FC2AD7F0B0E3B52 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F880BD7672032AAA2DB68165 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				526C79453AE0A5122D8F11FB /* ExploreView.swift */,
+				5CD79502F5A46BDF4E81E9BE /* ExploreViewModel.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		861FFD7EB2665A44C4001AAC /* OceanGate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B46C9B496ABB57BA0325D354 /* Build configuration list for PBXNativeTarget "OceanGate" */;
+			buildPhases = (
+				31999F10DCEB4E2CBAA15651 /* Sources */,
+				37C9199868686A54F7CBE460 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OceanGate;
+			packageProductDependencies = (
+			);
+			productName = OceanGate;
+			productReference = F7CEA97446F9472043FCB3CD /* OceanGate.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4225C79B1C3B312E266B2AC6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = E4B7132194604BEC57F07B95 /* Build configuration list for PBXProject "OceanGate" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EFBC0D3E327713FA61B6136A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				861FFD7EB2665A44C4001AAC /* OceanGate */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37C9199868686A54F7CBE460 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C065BE619BF01D3413F91DD5 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		31999F10DCEB4E2CBAA15651 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CADF23E5D51FA3B4F46E672 /* AnimatedNeonBackground.swift in Sources */,
+				2744C5350AC1C22BA7ABDE2C /* AppConfiguration.swift in Sources */,
+				8604904D9DF790A217A7FA9E /* AsyncNFTImage.swift in Sources */,
+				E26FA679D77008C3823297B1 /* CollectionOverview.swift in Sources */,
+				7F53650C49C52DB4A512382D /* ExploreView.swift in Sources */,
+				4F8C9E774EB0AD4FAC2B80BC /* ExploreViewModel.swift in Sources */,
+				BCB6E6185ACC32A063E4EF78 /* Formatters.swift in Sources */,
+				15BFDD5CBF5D01EA88390A8E /* GlassPanel.swift in Sources */,
+				09C35542F3BD3D7C30CD480F /* NFT.swift in Sources */,
+				88FB92251501C97EF8C07294 /* NeonTheme.swift in Sources */,
+				0C3916FB0FD016A46F4E1B2B /* OceanGateApp.swift in Sources */,
+				3D643EA4AF7A631FAE30A695 /* OpenSeaAPIClient.swift in Sources */,
+				79ACD2E37475A46C45C3563E /* OpenSeaDTOs.swift in Sources */,
+				C2E2A7176EF5E614FEEE9497 /* OpenSeaRepository.swift in Sources */,
+				8A67B7A80177FDB2B68CF966 /* OpenSeaServicing.swift in Sources */,
+				D22C033DCC51A091372B1603 /* PreviewOpenSeaService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		139ACA087D04DA2E301A1F0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		45EC845D8AAE45486EEEA92C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47ECF87298394DAC851DB70B /* OpenSea.local.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = OceanGate/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.deep.neonatlas;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		5D5E3BF59DFB67FE6679F4C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47ECF87298394DAC851DB70B /* OpenSea.local.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = OceanGate/Info.plist;
+				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.deep.neonatlas;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		BD2AFE716E28187B79EA5DFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B46C9B496ABB57BA0325D354 /* Build configuration list for PBXNativeTarget "OceanGate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5D5E3BF59DFB67FE6679F4C7 /* Debug */,
+				45EC845D8AAE45486EEEA92C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E4B7132194604BEC57F07B95 /* Build configuration list for PBXProject "OceanGate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD2AFE716E28187B79EA5DFC /* Debug */,
+				139ACA087D04DA2E301A1F0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4225C79B1C3B312E266B2AC6 /* Project object */;
+}
