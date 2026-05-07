@@ -34,9 +34,9 @@ https://github.com/user-attachments/assets/0618313f-9810-4bc0-be28-bd461fdfada9
   - Repository for DTO-to-domain mapping
   - SwiftUI views focused on presentation
 
-## API Key
+## Running the app / API Key
 
-The app reads `OPENSEA_API_KEY` from `Config/OpenSea.local.xcconfig`, which is intentionally gitignored. `Config/OpenSea.example.xcconfig` is tracked as a safe template.
+The app reads `OPENSEA_API_KEY` from `Config/OpenSea.local.xcconfig`, which is intentionally gitignored. `Config/OpenSea.example.xcconfig` is tracked as a safe template. Use this template with your own API key in order to run the application.
 
 For production, do not ship a marketplace API key directly in an app binary. Put the key behind a backend or token-broker service.
 
