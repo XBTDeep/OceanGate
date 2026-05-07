@@ -30,7 +30,7 @@ struct ExploreView: View {
                                 Task { await viewModel.refresh() }
                             }
                         case .loaded:
-                            content(width: contentWidth)
+                            content(width: contentWidth, viewportWidth: geometry.size.width, horizontalPadding: horizontalPadding)
                         }
                     }
                     .frame(width: contentWidth, alignment: .leading)
@@ -81,7 +81,7 @@ struct ExploreView: View {
     }
 
     @ViewBuilder
-    private func content(width: CGFloat) -> some View {
+    private func content(width: CGFloat, viewportWidth: CGFloat, horizontalPadding: CGFloat) -> some View {
         if let selectedCollection = viewModel.selectedCollection {
             CollectionHeroView(collection: selectedCollection, width: width)
 
@@ -89,10 +89,11 @@ struct ExploreView: View {
                 collections: viewModel.collections,
                 selectedSlug: viewModel.selectedSlug,
                 namespace: selectionNamespace,
-                width: width
+                width: viewportWidth
             ) { slug in
                 Task { await viewModel.selectCollection(slug: slug) }
             }
+            .offset(x: -horizontalPadding)
 
             NFTOrbitSection(phase: viewModel.nftPhase, nfts: viewModel.nfts, width: width) { nft in
                 viewModel.selectedNFT = nft
@@ -113,6 +114,7 @@ private struct CollectionHeroView: View {
                 ZStack(alignment: .bottomLeading) {
                     AsyncNFTImage(url: collection.bannerImageURL ?? collection.imageURL, cornerRadius: 24)
                         .frame(width: innerWidth, height: 230)
+                        .cornerRadius(30)
                         .clipped()
                         .overlay {
                             LinearGradient(colors: [.clear, .black.opacity(0.74)], startPoint: .center, endPoint: .bottom)
@@ -253,7 +255,7 @@ private struct CollectionRailView: View {
                     .buttonStyle(.plain)
                 }
             }
-            .padding(.horizontal, 2)
+            .padding(.horizontal, 0)
         }
         .frame(width: width, alignment: .leading)
         .clipped()
