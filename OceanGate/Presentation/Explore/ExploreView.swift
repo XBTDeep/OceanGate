@@ -340,8 +340,8 @@ private struct CollectionRailView: View {
             }
             .padding(.horizontal, 0)
         }
+        .scrollClipDisabled()
         .frame(width: width, alignment: .leading)
-        .clipped()
     }
 }
 
@@ -353,10 +353,6 @@ private struct CollectionSignalView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Text("Trait Radar")
-                    .font(.title3.weight(.black))
-                    .foregroundStyle(.white)
-
                 Spacer()
 
                 if case .loaded = phase, !traits.isEmpty {
@@ -449,7 +445,7 @@ private struct NFTOrbitSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("Signal Stream")
+                Text("NFT Stream")
                     .font(.title2.weight(.black))
                 Spacer()
                 Text("\(nfts.count) live NFTs")
