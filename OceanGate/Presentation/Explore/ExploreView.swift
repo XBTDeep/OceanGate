@@ -61,7 +61,7 @@ struct ExploreView: View {
                     .font(.system(size: 28, weight: .bold))
                     .foregroundStyle(LinearGradient(colors: [NeonTheme.mint, NeonTheme.coral], startPoint: .topLeading, endPoint: .bottomTrailing))
 
-                Text("Neon Atlas")
+                Text("Ocean Gate")
                     .font(.system(size: 38, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)
@@ -166,15 +166,23 @@ private struct CollectionHeroView: View {
                 .frame(width: innerWidth)
 
                 if let openseaURL = collection.openseaURL {
-                    Link(destination: openseaURL) {
-                        Label("Open on OpenSea", systemImage: "safari.fill")
-                            .font(.headline.weight(.bold))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.82)
-                            .frame(width: innerWidth)
+                    HStack {
+                        Spacer(minLength: 0)
+
+                        Link(destination: openseaURL) {
+                            Label("Open on OpenSea", systemImage: "safari.fill")
+                                .font(.headline.weight(.bold))
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.82)
+                                .padding(.horizontal, 24)
+                                .frame(maxWidth: min(300, innerWidth * 0.82))
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(NeonTheme.mint)
+
+                        Spacer(minLength: 0)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(NeonTheme.mint)
+                    .frame(width: innerWidth)
                 }
             }
             .padding(14)

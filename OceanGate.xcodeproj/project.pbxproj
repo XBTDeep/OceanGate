@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,7 @@
 		CD31B090DD53C769B6083159 /* OpenSeaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaRepository.swift; sourceTree = "<group>"; };
 		F4660A0E1AAD791054115045 /* OpenSeaAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSeaAPIClient.swift; sourceTree = "<group>"; };
 		F75D4BF77D707A0F2B148AA0 /* Formatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatters.swift; sourceTree = "<group>"; };
-		F7CEA97446F9472043FCB3CD /* OceanGate.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = OceanGate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7CEA97446F9472043FCB3CD /* OceanGate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OceanGate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -244,7 +244,6 @@
 			);
 			mainGroup = EFBC0D3E327713FA61B6136A;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -356,6 +355,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = B5JJ9SHMFC;
 				INFOPLIST_FILE = OceanGate/Info.plist;
 				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -375,6 +375,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = B5JJ9SHMFC;
 				INFOPLIST_FILE = OceanGate/Info.plist;
 				INFOPLIST_KEY_UIUserInterfaceStyle = dark;
 				LD_RUNPATH_SEARCH_PATHS = (
